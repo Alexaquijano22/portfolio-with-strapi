@@ -2,7 +2,7 @@ import { Card } from '../../../shared/components/Card.jsx';
 import { Badge } from '../../../shared/components/Badge.jsx';
 
 const linkClass =
-  'text-[--color-accent] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:ring-offset-2 focus-visible:ring-offset-[--color-bg]';
+  'text-accent hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
 
 // Single project card. coverImage and the live/repo links are all rendered
 // conditionally — when their value is null the element is omitted entirely (no
@@ -21,13 +21,13 @@ export function ProjectCard({ project }) {
         />
       )}
 
-      <h3 className="text-lg font-semibold text-[--color-text]">{title}</h3>
-      <p className="text-[--color-muted]">{description}</p>
+      <h3 className="text-lg font-semibold text-text">{title}</h3>
+      <p className="text-muted">{description}</p>
 
       {techStack.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {techStack.map((t) => (
-            <Badge key={t.name} variant="muted">
+            <Badge key={t.name} variant="accent">
               {t.name}
             </Badge>
           ))}

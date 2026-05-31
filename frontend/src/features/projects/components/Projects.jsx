@@ -9,7 +9,7 @@ function ProjectsSkeleton() {
       className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
     >
       {[0, 1, 2].map((i) => (
-        <div key={i} className="h-72 animate-pulse rounded-xl bg-[--color-surface]" />
+        <div key={i} className="h-72 animate-pulse rounded-xl bg-surface" />
       ))}
     </div>
   );
@@ -20,14 +20,14 @@ export function Projects() {
 
   return (
     <section id="projects" className="mx-auto max-w-[1280px] px-6 py-16">
-      <h2 className="mb-8 text-3xl font-bold text-[--color-text]">Projects</h2>
+      <h2 className="mb-8 text-3xl font-bold text-text">Projects</h2>
 
       {loading && <ProjectsSkeleton />}
 
       {!loading && error && <ErrorState error={error} onRetry={refetch} />}
 
       {!loading && !error && data?.length === 0 && (
-        <p className="text-[--color-muted]">No projects listed yet.</p>
+        <p className="text-muted">No projects listed yet.</p>
       )}
 
       {!loading && !error && data?.length > 0 && (

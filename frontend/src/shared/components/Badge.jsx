@@ -1,6 +1,6 @@
 const VARIANTS = {
-  accent: 'bg-[--color-accent]/10 text-[--color-accent]',
-  muted:  'bg-[--color-surface] text-[--color-muted]',
+  accent: 'bg-accent/10 text-accent',
+  muted:  'bg-surface text-muted',
 };
 
 export function Badge({ children, variant = 'muted', className = '' }) {

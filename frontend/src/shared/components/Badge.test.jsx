@@ -8,11 +8,11 @@ describe('Badge', () => {
 
     const badge = screen.getByText('React');
     expect(badge).toBeInTheDocument();
-    expect(badge).toHaveClass('text-[--color-accent]');
+    expect(badge).toHaveClass('text-accent');
   });
 
   it('falls back to the muted variant by default', () => {
     render(<Badge>Tools</Badge>);
-    expect(screen.getByText('Tools')).toHaveClass('text-[--color-muted]');
+    expect(screen.getByText('Tools')).toHaveClass('text-muted');
   });
 });

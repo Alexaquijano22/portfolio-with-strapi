@@ -12,6 +12,6 @@ describe('Card', () => {
 
     const text = screen.getByText('hello');
     expect(text).toBeInTheDocument();
-    expect(text.parentElement).toHaveClass('bg-[--color-surface]');
+    expect(text.parentElement).toHaveClass('bg-surface');
   });
 });

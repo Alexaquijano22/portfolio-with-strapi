@@ -12,13 +12,13 @@ export function ErrorState({ error, onRetry }) {
   return (
     <div
       role="alert"
-      className="flex flex-col items-center gap-4 p-6 text-center text-[--color-text]"
+      className="flex flex-col items-center gap-4 p-6 text-center text-text"
     >
-      <p className="text-[--color-muted]">{messageFor(error?.type)}</p>
+      <p className="text-muted">{messageFor(error?.type)}</p>
       <button
         type="button"
         onClick={onRetry}
-        className="rounded-lg bg-[--color-accent] px-4 py-2 font-medium text-[--color-bg] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:ring-offset-2 focus-visible:ring-offset-[--color-bg]"
+        className="rounded-lg bg-accent px-4 py-2 font-medium text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
       >
         Retry
       </button>

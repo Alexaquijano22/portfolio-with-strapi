@@ -102,6 +102,14 @@
       "component": "shared.social-link",
       "repeatable": true,
       "required": false
+    },
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

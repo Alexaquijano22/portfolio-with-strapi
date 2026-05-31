@@ -20,7 +20,7 @@ function Layout() {
   }, [data]);
 
   return (
-    <div className="min-h-screen bg-[--color-bg] text-[--color-text]">
+    <div className="min-h-screen bg-bg text-text">
       <Header />
 
       <main>

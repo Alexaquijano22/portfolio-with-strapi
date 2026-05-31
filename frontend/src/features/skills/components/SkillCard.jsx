@@ -12,13 +12,13 @@ export function SkillCard({ skill }) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[--color-accent]/10 text-sm font-semibold text-[--color-accent]"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-sm font-semibold text-accent"
         >
           {skill.name?.[0]?.toUpperCase()}
         </span>
       )}
 
-      <p className="font-medium text-[--color-text]">{skill.name}</p>
+      <p className="font-medium text-text">{skill.name}</p>
       <Badge variant="accent">{skill.category}</Badge>
     </Card>
   );

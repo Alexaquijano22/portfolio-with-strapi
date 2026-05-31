@@ -14,10 +14,10 @@ export function CategoryFilter({ categories, active, onChange }) {
             type="button"
             aria-pressed={isActive}
             onClick={() => onChange(cat)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:ring-offset-2 focus-visible:ring-offset-[--color-bg] ${
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
               isActive
-                ? 'bg-[--color-accent] text-[--color-bg]'
-                : 'bg-[--color-surface] text-[--color-muted] hover:text-[--color-text]'
+                ? 'bg-accent text-bg'
+                : 'bg-surface text-muted hover:text-text'
             }`}
           >
             {cat}

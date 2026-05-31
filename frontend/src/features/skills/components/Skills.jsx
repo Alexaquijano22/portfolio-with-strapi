@@ -13,7 +13,7 @@ function SkillsSkeleton() {
       className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
     >
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="h-32 animate-pulse rounded-xl bg-[--color-surface]" />
+        <div key={i} className="h-32 animate-pulse rounded-xl bg-surface" />
       ))}
     </div>
   );
@@ -29,14 +29,14 @@ export function Skills() {
 
   return (
     <section id="skills" className="mx-auto max-w-[1280px] px-6 py-16">
-      <h2 className="mb-8 text-3xl font-bold text-[--color-text]">Skills</h2>
+      <h2 className="mb-8 text-3xl font-bold text-text">Skills</h2>
 
       {loading && <SkillsSkeleton />}
 
       {!loading && error && <ErrorState error={error} onRetry={refetch} />}
 
       {!loading && !error && data?.length === 0 && (
-        <p className="text-[--color-muted]">No skills listed yet.</p>
+        <p className="text-muted">No skills listed yet.</p>
       )}
 
       {!loading && !error && data?.length > 0 && (
