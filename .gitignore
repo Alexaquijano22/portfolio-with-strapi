@@ -25,3 +25,6 @@ backend/.database/
 .DS_Store
 .vscode/
 *.log
+
+!backend/.tmp/
+!backend/.tmp/data.db
