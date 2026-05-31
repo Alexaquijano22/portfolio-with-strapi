@@ -32,7 +32,7 @@ src/features/profile/
 ## 2. `profileService.js`
 
 ```js
-import { httpClient } from '../../foundation/api/httpClient';
+import { httpClient } from '../../../shared/api/httpClient.js';
 
 export async function getProfile() {
   const json = await httpClient('/api/profile?populate=*');

@@ -19,21 +19,26 @@ frontend/
     ├── main.jsx                  # ReactDOM.createRoot; mounts <App />
     ├── App.jsx                   # Composes all section components in order
     ├── index.css                 # @import "tailwindcss"; + @theme block with design tokens
-    └── features/
-        ├── foundation/
-        │   ├── api/
-        │   │   └── httpClient.js          # ApiError class + httpClient function
-        │   ├── components/
-        │   │   ├── Spinner.jsx
-        │   │   ├── ErrorState.jsx
-        │   │   ├── Card.jsx
-        │   │   └── Badge.jsx
-        │   └── tests/
-        │       └── httpClient.test.js
+    ├── shared/                   # Cross-cutting infrastructure (not a user-facing feature)
+    │   ├── api/
+    │   │   ├── httpClient.js          # ApiError class + httpClient function
+    │   │   └── httpClient.test.js     # co-located beside the unit under test
+    │   └── components/                # Reusable UI primitives
+    │       ├── Spinner.jsx
+    │       ├── ErrorState.jsx
+    │       ├── Card.jsx
+    │       └── Badge.jsx
+    └── features/                 # User-facing features only
         ├── profile/   ← see profile feature
         ├── skills/    ← see skills feature
         └── projects/  ← see projects feature
 ```
+
+> **Folder convention.** `src/features/` is reserved for user-facing features
+> (`profile`, `skills`, `projects`). Cross-cutting infrastructure — the HTTP client,
+> typed errors, and reusable UI primitives — lives under `src/shared/`. Tests are
+> co-located beside the code they exercise (e.g. `httpClient.test.js` sits in
+> `src/shared/api/` next to `httpClient.js`).
 
 ---
 
@@ -143,8 +148,8 @@ export default defineConfig({
 @import "tailwindcss";
 
 @theme {
-  /* TODO: pick one — #10b981 emerald | #8b5cf6 violet | #f59e0b amber */
-  --color-accent:  #TODO;
+  /* Accent: violet (decided) — alternatives were #10b981 emerald, #f59e0b amber */
+  --color-accent:  #8b5cf6;   /* violet-500 */
   --color-bg:      #0f172a;
   --color-surface: #1e293b;
   --color-border:  #334155;

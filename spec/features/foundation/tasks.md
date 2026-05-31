@@ -20,7 +20,7 @@
 4. Replace `vite.config.js` with the config from `design.md §4` (adds Tailwind plugin + Vitest config).
 5. Create `src/tests/setup.js` with `import '@testing-library/jest-dom'`.
 6. Replace the generated `src/index.css` with the token-bearing stylesheet from `design.md §5`.
-   Leave the accent token as `#TODO`.
+   The accent token is violet `#8b5cf6` (decided).
 7. Strip boilerplate from `src/App.jsx` (remove the counter demo; leave a `<div>` placeholder).
 8. Delete unused scaffold files: `src/App.css`, `src/assets/react.svg`.
 9. Create `.env` with `VITE_API_URL=http://localhost:1337` (add to `.gitignore`).
@@ -37,8 +37,8 @@
 ## F-02 · Implement ApiError and httpClient
 
 **Files touched:**
-`src/features/foundation/api/httpClient.js`,
-`src/features/foundation/tests/httpClient.test.js`
+`src/shared/api/httpClient.js`,
+`src/shared/api/httpClient.test.js`  (co-located beside httpClient.js)
 
 **Steps:**
 1. Create `httpClient.js` following the design in `design.md §2`.
@@ -60,8 +60,8 @@
 ## F-03 · Implement Spinner and ErrorState primitives
 
 **Files touched:**
-`src/features/foundation/components/Spinner.jsx`,
-`src/features/foundation/components/ErrorState.jsx`
+`src/shared/components/Spinner.jsx`,
+`src/shared/components/ErrorState.jsx`
 
 **Steps:**
 1. Implement `Spinner` (see `design.md §3.1`): accepts optional `className`; renders a
@@ -84,8 +84,8 @@
 ## F-04 · Implement Card and Badge primitives
 
 **Files touched:**
-`src/features/foundation/components/Card.jsx`,
-`src/features/foundation/components/Badge.jsx`
+`src/shared/components/Card.jsx`,
+`src/shared/components/Badge.jsx`
 
 **Steps:**
 1. Implement `Card` (see `design.md §3.3`): wraps `children` in a styled surface `<div>`;
@@ -130,4 +130,4 @@ Before moving to any feature, confirm **all** of the following:
 | `pnpm test` exits 0 with ≥ 6 passing tests (httpClient × 4, Spinner × 1, ErrorState × 1, Card × 1, Badge × 1) | |
 | `httpClient.js` is the only file calling `fetch` | |
 | No hardcoded URL in any source file | |
-| Design tokens declared once in `index.css`; accent is `#TODO` | |
+| Design tokens declared once in `index.css`; accent is violet `#8b5cf6` | |

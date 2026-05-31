@@ -15,6 +15,18 @@ accessible markup.
 The page renders six sections in order: **Header → Hero → About → Skills → Projects → Footer**.
 The Header is sticky. All remaining sections are within a `<main>` element.
 
+### 1.1 Code Organization
+
+The frontend separates feature code from shared infrastructure:
+
+- **`src/features/`** is reserved for user-facing features only — `profile`, `skills`, and
+  `projects`. Each owns its sections, hooks, and feature-specific tests.
+- **`src/shared/`** holds cross-cutting infrastructure used by every feature: the HTTP client
+  and typed `ApiError` (`src/shared/api/httpClient.js`) and reusable UI primitives
+  (`src/shared/components/` — `Spinner`, `ErrorState`, `Card`, `Badge`).
+- Tests are **co-located** beside the code they exercise (e.g. `httpClient.test.js` lives in
+  `src/shared/api/` next to `httpClient.js`).
+
 ---
 
 ## 2. Backend

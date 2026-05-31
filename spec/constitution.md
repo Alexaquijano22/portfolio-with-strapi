@@ -54,7 +54,7 @@ The string `"localhost:1337"` must never appear in any source file.
 
 ## 4. ApiError — Typed Error Classification
 
-A custom `ApiError` class (in `src/features/foundation/api/httpClient.js`) is the only
+A custom `ApiError` class (in `src/shared/api/httpClient.js`) is the only
 error type propagated through the system.
 
 ```
@@ -109,8 +109,8 @@ stylesheet (`src/index.css`) inside a Tailwind CSS v4 `@theme` block.
 
 ```css
 @theme {
-  /* TODO: pick one accent — #10b981 emerald | #8b5cf6 violet | #f59e0b amber */
-  --color-accent:   #TODO;
+  /* Accent: violet (decided) — alternatives were #10b981 emerald, #f59e0b amber */
+  --color-accent:   #8b5cf6;   /* violet-500 */
 
   --color-bg:       #0f172a;   /* slate-900 */
   --color-surface:  #1e293b;   /* slate-800 */

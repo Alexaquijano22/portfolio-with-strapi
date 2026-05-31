@@ -28,7 +28,7 @@ src/features/skills/
 ## 2. `skillsService.js`
 
 ```js
-import { httpClient } from '../../foundation/api/httpClient';
+import { httpClient } from '../../../shared/api/httpClient.js';
 
 export async function getSkills() {
   const json = await httpClient('/api/skills?populate=*');

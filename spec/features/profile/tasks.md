@@ -14,7 +14,7 @@
 **Steps:**
 1. Create `profileService.js` implementing `getProfile()` as specified in `design.md §2`.
 2. Create `profileService.test.js`:
-   - Mock `httpClient` via `vi.mock('../../foundation/api/httpClient')`.
+   - Mock `httpClient` via `vi.mock('../../../shared/api/httpClient.js')`.
    - Test: successful response → returned object contains `fullName`; `avatar.url` is absolute.
    - Test: `avatar` field absent/null → function returns without throwing.
 

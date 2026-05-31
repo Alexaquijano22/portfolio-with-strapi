@@ -27,7 +27,7 @@ src/features/projects/
 ## 2. `projectsService.js`
 
 ```js
-import { httpClient } from '../../foundation/api/httpClient';
+import { httpClient } from '../../../shared/api/httpClient.js';
 
 export async function getProjects() {
   const json = await httpClient('/api/projects?populate=*');
