@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_teches",
+  "info": {
+    "displayName": "tech"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

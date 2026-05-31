@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_highlights",
+  "info": {
+    "displayName": "mini-card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  /* TODO: pick one accent — #10b981 emerald | #8b5cf6 violet | #f59e0b amber */
+  --color-accent:  #8b5cf6;
+  --color-bg:      #0f172a;
+  --color-surface: #1e293b;
+  --color-border:  #334155;
+  --color-text:    #f1f5f9;
+  --color-muted:   #94a3b8;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

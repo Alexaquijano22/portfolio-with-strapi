@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+**/node_modules/
+
+# Entornos
+.env
+**/.env
+*.env
+
+# Builds
+dist/
+build/
+**/dist/
+.cache/
+
+# Strapi
+backend/.tmp/
+backend/.strapi/
+backend/build/
+backend/.database/
+**/*.db
+**/*.sqlite
+
+# Sistema / editor
+.DS_Store
+.vscode/
+*.log
