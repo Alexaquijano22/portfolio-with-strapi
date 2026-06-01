@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ProfileProvider, useProfileContext } from './features/profile/context/ProfileContext.jsx';
 import { Header } from './features/profile/components/Header.jsx';
 import { Hero } from './features/profile/components/Hero.jsx';
@@ -6,6 +7,7 @@ import { About } from './features/profile/components/About.jsx';
 import { Footer } from './features/profile/components/Footer.jsx';
 import { Skills } from './features/skills/components/Skills.jsx';
 import { Projects } from './features/projects/components/Projects.jsx';
+import { ProductsPage } from './features/products/components/ProductsPage.jsx';
 
 function Layout() {
   const { data } = useProfileContext();
@@ -35,11 +37,23 @@ function Layout() {
   );
 }
 
-function App() {
+// The existing portfolio, with ProfileProvider scoped to it (single fetch).
+function PortfolioPage() {
   return (
     <ProfileProvider>
       <Layout />
     </ProfileProvider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PortfolioPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
