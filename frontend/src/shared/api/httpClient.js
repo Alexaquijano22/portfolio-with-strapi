@@ -8,7 +8,7 @@ export class ApiError extends Error {
 }
 
 export async function httpClient(path, options) {
-  const url = `${import.meta.env.VITE_API_URL}${path}`;
+  const url = /^https?:\/\//i.test(path) ? path : `${import.meta.env.VITE_API_URL}${path}`;
 
   let response;
   try {

@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "products_pages",
+  "info": {
+    "singularName": "products-page",
+    "pluralName": "products-pages",
+    "displayName": "Products-page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "intro": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

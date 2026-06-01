@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const NAV_LINKS = [
   { href: '#hero', label: 'Home' },
   { href: '#about', label: 'About' },
@@ -5,6 +7,9 @@ const NAV_LINKS = [
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ];
+
+const navLinkClass =
+  'rounded text-muted transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
 
 export function Header() {
   return (
@@ -16,14 +21,16 @@ export function Header() {
         <ul className="flex flex-wrap justify-center gap-4 text-sm">
           {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
-              <a
-                href={href}
-                className="rounded text-muted transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-              >
+              <a href={href} className={navLinkClass}>
                 {label}
               </a>
             </li>
           ))}
+          <li>
+            <Link to="/products" className={navLinkClass}>
+              Products
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

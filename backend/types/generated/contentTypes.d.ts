@@ -440,6 +440,49 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
+  collectionName: 'products_pages';
+  info: {
+    displayName: 'Products-page';
+    pluralName: 'products-pages';
+    singularName: 'products-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    intro: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::products-page.products-page'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProfileProfile extends Struct.SingleTypeSchema {
   collectionName: 'profiles';
   info: {
@@ -1157,6 +1200,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::products-page.products-page': ApiProductsPageProductsPage;
       'api::profile.profile': ApiProfileProfile;
       'api::project.project': ApiProjectProject;
       'api::skill.skill': ApiSkillSkill;

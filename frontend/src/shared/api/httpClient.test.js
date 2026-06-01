@@ -1,9 +1,13 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { httpClient, ApiError } from './httpClient.js';
 
 describe('httpClient', () => {
   beforeEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it('returns parsed JSON on a successful 200 response', async () => {
@@ -52,5 +56,32 @@ describe('httpClient', () => {
       type:   'server',
       status: 500,
     });
+  });
+
+  it('prefixes VITE_API_URL for relative paths', async () => {
+    vi.stubEnv('VITE_API_URL', 'http://api.test');
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await httpClient('/api/profile');
+
+    expect(fetchMock).toHaveBeenCalledWith('http://api.test/api/profile', undefined);
+  });
+
+  it('passes absolute URLs through without prefixing VITE_API_URL', async () => {
+    vi.stubEnv('VITE_API_URL', 'http://api.test');
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([{ id: 1, title: 'A product' }]),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await httpClient('https://fakestoreapi.com/products');
+
+    expect(fetchMock).toHaveBeenCalledWith('https://fakestoreapi.com/products', undefined);
+    expect(result).toEqual([{ id: 1, title: 'A product' }]);
   });
 });
