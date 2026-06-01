@@ -1,62 +1,62 @@
 # Exercise 4: AI-Assisted Code Refactoring
 
-## Código original
+## Original code
 
 ```javascript
 function getUser(d){ return
 fetch("https://jsonplaceholder.typicode.com/users/"+d).then(x=>x.json()).then(j=>console.log(j)) }
 ```
 
-### Problemas detectados
+### Issues identified
 
-- **Side effect interno**: hace `console.log` dentro de la función, por lo que el dato no se puede reutilizar.
-- **Sin manejo de errores HTTP**: `fetch` no lanza error en respuestas 4xx/5xx, así que un 404 entra igual al parseo.
-- **Sin tipado**: no hay garantías sobre la forma del dato ni sobre el tipo del parámetro.
-- **Nombres sin significado**: `d`, `x`, `j` dificultan la lectura.
-- **Concatenación de strings** en lugar de template literals.
-
----
-
-## Narrativa de prompts (proceso de refinamiento)
-
-El refactor no salió de un solo prompt. Cada iteración partió de revisar críticamente la salida de la IA y detectar qué faltaba para considerarlo *production-ready*.
-
-### Prompt 1 — Refactor inicial
-
-> *"Refactoriza esta función JavaScript a una versión moderna y legible. Usa async/await en lugar de cadenas de .then() y nombres de variables descriptivos."*
-
-**Resultado:** convirtió la cadena de promesas a `async/await` y renombró `d`, `x`, `j`.
-**Problema detectado:** mantuvo el `console.log` dentro de la función, lo que la hacía imposible de reutilizar.
-
-### Prompt 2 — Separación de responsabilidades
-
-> *"La función no debería imprimir nada. Quiero que retorne los datos para poder reutilizarla. Aplica separación de responsabilidades."*
-
-**Resultado:** cambió el `console.log(j)` por un `return`. Ahora la función solo obtiene datos; quien la llama decide qué hacer con ellos.
-**Problema detectado:** seguía sin manejar el caso de un error HTTP.
-
-### Prompt 3 — Manejo de errores HTTP
-
-> *"`fetch` no lanza error en respuestas 4xx/5xx. Agrega verificación de `response.ok` y lanza un error descriptivo que incluya el status code."*
-
-**Resultado:** añadió el chequeo de `response.ok` y una clase `UserFetchError` con el `statusCode`.
-**Problema detectado:** faltaba tipado y validación del input.
-
-### Prompt 4 — Tipado y validación
-
-> *"Migra todo a TypeScript. Define una interface `User`, tipa el retorno como `Promise<User>` y valida que el `userId` sea un entero positivo antes de hacer la petición."*
-
-**Resultado:** versión final con `interface User`, tipos en firma y retorno, y validación de entrada.
-
-### Prompt 5 — Ejemplo de consumo
-
-> *"Muéstrame cómo consumir esta función con manejo de errores tipado usando `instanceof`."*
-
-**Resultado:** el bloque `try/catch` que distingue `UserFetchError` de errores inesperados.
+- **Internal side effect**: it does a `console.log` inside the function, so the data can't be reused.
+- **No HTTP error handling**: `fetch` does not throw on 4xx/5xx responses, so a 404 still flows into the parsing step.
+- **No typing**: there are no guarantees about the shape of the data or the type of the parameter.
+- **Meaningless names**: `d`, `x`, `j` hurt readability.
+- **String concatenation** instead of template literals.
 
 ---
 
-## Versión final del código
+## Prompt narrative (refinement process)
+
+The refactor didn't come out of a single prompt. Each iteration started by critically reviewing the AI's output and spotting what was still missing to consider it *production-ready*.
+
+### Prompt 1 — Initial refactor
+
+> *"Refactor this JavaScript function into a modern, readable version. Use async/await instead of .then() chains and descriptive variable names."*
+
+**Result:** converted the promise chain to `async/await` and renamed `d`, `x`, `j`.
+**Issue identified:** it kept the `console.log` inside the function, which made it impossible to reuse.
+
+### Prompt 2 — Separation of concerns
+
+> *"The function shouldn't print anything. I want it to return the data so I can reuse it. Apply separation of concerns."*
+
+**Result:** replaced `console.log(j)` with a `return`. The function now only fetches data; the caller decides what to do with it.
+**Issue identified:** it still didn't handle the HTTP error case.
+
+### Prompt 3 — HTTP error handling
+
+> *"`fetch` doesn't throw on 4xx/5xx responses. Add a `response.ok` check and throw a descriptive error that includes the status code."*
+
+**Result:** added the `response.ok` check and a `UserFetchError` class carrying the `statusCode`.
+**Issue identified:** typing and input validation were still missing.
+
+### Prompt 4 — Typing and validation
+
+> *"Migrate everything to TypeScript. Define a `User` interface, type the return as `Promise<User>`, and validate that `userId` is a positive integer before making the request."*
+
+**Result:** the final version with `interface User`, types on the signature and return, and input validation.
+
+### Prompt 5 — Usage example
+
+> *"Show me how to consume this function with typed error handling using `instanceof`."*
+
+**Result:** the `try/catch` block that distinguishes `UserFetchError` from unexpected errors.
+
+---
+
+## Final version of the code
 
 ```typescript
 interface User {
@@ -95,7 +95,7 @@ async function getUser(userId: number): Promise<User> {
 }
 ```
 
-### Ejemplo de uso
+### Usage example
 
 ```typescript
 try {
@@ -112,17 +112,17 @@ try {
 
 ---
 
-## Resumen de mejoras
+## Summary of improvements
 
-| Aspecto | Antes | Después |
+| Aspect | Before | After |
 |---|---|---|
-| Side effects | `console.log` interno | Retorna los datos |
-| Errores HTTP | No se manejaban | Verifica `response.ok` |
-| Tipado | Ninguno | `interface User`, `Promise<User>` |
-| Validación de input | Ninguna | Entero positivo |
-| Errores personalizados | No | Clase `UserFetchError` |
-| Legibilidad | `d`, `x`, `j` | Nombres descriptivos + template literals |
+| Side effects | Internal `console.log` | Returns the data |
+| HTTP errors | Not handled | Checks `response.ok` |
+| Typing | None | `interface User`, `Promise<User>` |
+| Input validation | None | Positive integer |
+| Custom errors | No | `UserFetchError` class |
+| Readability | `d`, `x`, `j` | Descriptive names + template literals |
 
-## Reflexión
+## Reflection
 
-La IA aceleró cada paso del refactor, pero las decisiones de arquitectura —no imprimir dentro de la función, separar el error en su propia clase, validar la entrada— vinieron del criterio del desarrollador. El valor del flujo asistido por IA está en iterar rápido sobre las salidas y aplicar juicio técnico para llevarlas a calidad de producción.
+AI sped up every step of the refactor, but the architectural decisions —not printing inside the function, splitting the error into its own class, validating the input— came from the developer's judgment. The value of the AI-assisted flow lies in iterating quickly over the outputs and applying technical judgment to bring them to production quality.
